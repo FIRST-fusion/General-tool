@@ -1,4 +1,7 @@
 function draw_pressure(inputfile)
+% draw_pressure('wout_filename.nc)
+% Created by Lin 2023
+% uploaded in 2024 July 4th
 
 filename=truncateString(inputfile);
 % read from NCfile
