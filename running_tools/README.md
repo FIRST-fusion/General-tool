@@ -26,7 +26,7 @@
 python generate_input.py
 ```
 
-生成的輸入文件將保存在 `./input_files_0716` 目錄中。(可自行修改路徑)
+生成的輸入文件將保存在 `./input_files_0716` 資料夾中。(可自行修改路徑)
 
 ### 2. boost_search_walk.py
 
@@ -50,7 +50,7 @@ python boost_search_walk.py
 python search.py
 ```
 
-輸入文件來自 `./new_input_0716` 目錄，生成的輸出將保存在 `./output_files`(可自行修改路徑) 資料夾中。
+輸入文件來自 `./new_input_0716` 資料夾，生成的輸出將保存在 `./output_files`(可自行修改路徑) 資料夾中。
 
 ### 4. check_state.py
 
@@ -62,7 +62,7 @@ python search.py
 python check_state.py
 ```
 
-輸入文件來自 `./output_files` 目錄，分類後的文件將保存在 `./processed_outputs_0716` 目錄中，穩定結果的 CSV 文件保存在 `stable_results.csv`。
+輸入文件來自 `./output_files` 資料夾，分類後的文件將保存在 `./processed_outputs_0716` 資料夾中，穩定結果的 CSV 文件保存在 `stable_results.csv`。
 
 ### 5. make_output_csv.py
 
