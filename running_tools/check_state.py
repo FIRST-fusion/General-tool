@@ -27,7 +27,7 @@ def process_output_files(input_directory, stable_directory, unstable_directory, 
     
     for output_file in output_files:
         file_name = os.path.basename(output_file)
-        identifier = re.search(r"output_(FIRST\d+)\.txt", file_name).group(1)  # Extract identifier, e.g., "FIRST9"
+        identifier = re.search(r"output_(FIRST\d+).*\.txt", file_name).group(1)  # Extract identifier, e.g., "FIRST9"
         
         try:
             with open(output_file, 'r', errors='ignore') as file:
@@ -69,8 +69,8 @@ def process_output_files(input_directory, stable_directory, unstable_directory, 
 
 def main():
     input_directory = "./output_files"  # Directory where output files are initially stored
-    stable_directory = "./processed_outputs/stable"  # Directory to store stable results
-    unstable_directory = "./processed_outputs/unstable"  # Directory to store unstable results
+    stable_directory = "./processed_outputs_0716/stable"  # Directory to store stable results
+    unstable_directory = "./processed_outputs_0716/unstable"  # Directory to store unstable results
     
     # Patterns to match different types of files
     patterns = [

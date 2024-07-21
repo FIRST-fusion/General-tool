@@ -42,7 +42,7 @@ def move_file_using_mv(source, destination):
         print(f"Error: {e}")
 
 def main():
-    input_directory = "./input_files"  # Directory for input files
+    input_directory = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/new_input_0716"  # Directory for input files
     dcon_directory = "./dcon_files"  # Directory to store dcon files
     output_directory = "./output_files"  # Directory to store output files
     if not os.path.exists(dcon_directory):
@@ -70,15 +70,15 @@ def main():
                 run_command("./run_dcon_singlefile.sh", dcon_target_path, output_path=output_path)
             else:
                 print(f"File not found: {dcon_filename}")
-        else:
-            print(f"Command './xvmec' execution failed, corresponding dcon file for {input_file} not generated.")
+        # else:
+        #     print(f"Command './xvmec' execution failed, corresponding dcon file for {input_file} not generated.")
 
     move_file_using_mv('./jxbout_*', './output_files')
     move_file_using_mv('./thread1.*', './output_files')
     move_file_using_mv('./wout_*', './output_files')
     move_file_using_mv('./mercier.*', './output_files')
     move_file_using_cp(f'{input_directory}/*', './output_files')
-    move_file_using_cp(f'{dcon_files}/*', './output_files')
+    move_file_using_cp(f'{dcon_directory}/*', './output_files')
 
 # Execute main program
 main()
