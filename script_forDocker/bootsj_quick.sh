@@ -39,7 +39,7 @@ echo "Run fort43_generator.sh:"
 
 #create data file
 if [ ! -e "${inputvmec}.data" ]; then
-  cp ITER_ripple.data ${inputvmec}.data
+  cp template.data ${inputvmec}.data
   new_value=$((ns-3))
   if [ "$new_value" -lt 0 ]; then
       echo "Error: $new_value is less than 0. Stopping the script."
@@ -58,7 +58,7 @@ if [ ! -e "${inputvmec}.data" ]; then
   short_inputvmec=$(echo "${inputvmec}" | cut -c1-7)
   sed -i "1s/.*/               $short_inputvmec/" "${inputvmec}.data"
   echo "New data ${inputvmec}.data file is created"
-  diff ITER_ripple.data ${inputvmec}.data
+  diff template.data ${inputvmec}.data
 fi
 
 echo "Run bootsj"
