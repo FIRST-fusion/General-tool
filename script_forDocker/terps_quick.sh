@@ -1,12 +1,9 @@
 inputvmec=${1}
 vmec_dir=$(pwd)
 
-vmec2tpr_dir="/home/linshih/workspace/vmec2tpr"
-terps_dir="/home/linshih/workspace/TERPS_TypeOneEnergy_codetransfer"
+vmec2tpr_dir="/workspace/TERPSICHORE/vmec2tpr"
+terps_dir="/workspace/TERPSICHORE/TERPSICHORE_main"
 
-# test
-#vmec2tpr_dir="/home/linshih/testspace/vmecv92terps"
-#terps_dir="/home/linshih/testspace/TERPS_TypeOneEnergy_codetransfer"
 
 
 echo "VMEC input namelist: input.${inputvmec}"

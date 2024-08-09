@@ -3,8 +3,8 @@
 current_dir=$(pwd)
 inputfile=${1}
 wout=${current_dir}/${inputfile}
-vm3dp_dir='/home/linshih/workspace/vm3dp'
-vmec2terps_dir='/home/linshih/workspace/vmec2tpr'
+vm3dp_dir='/workspace/TERPSICHORE/vm3dp'
+vmec2terps_dir='/workspace/TERPSICHORE/vmec2tpr'
 echo ${wout}
 
 original_string=${inputfile}

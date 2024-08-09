@@ -19,7 +19,7 @@ equil_file=${1}
 
 # dcon path 
 current_dir=$(pwd)
-dcon_dir="/home/linshih/workspace/dcon_3.80/dcon_3.80/rundir/Linux"
+dcon_dir="/workspace/DCON/rundir/Linux"
 
 cp ${equil_file} ${dcon_dir}
 cd ${dcon_dir}
