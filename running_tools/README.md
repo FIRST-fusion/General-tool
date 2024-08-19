@@ -53,31 +53,8 @@ python search.py --input_directory="./new_input_0716" --dcon_directory="./dcon_f
 
 你可以使用命令行參數來指定輸入文件、DCON文件和輸出文件的資料夾。
 
-### 4. check_state.py
 
-這個腳本處理輸出文件，並將穩定和不穩定的結果分類到不同的資料夾中，並生成CSV文件。
-
-**運行方式：**
-
-```bash
-python check_state.py --input_directory="./output_files" --stable_directory="./processed_outputs_0716/stable" --unstable_directory="./processed_outputs_0716/unstable"
-```
-
-你可以使用命令行參數來指定輸入文件及穩定和不穩定結果的輸出資料夾。
-
-### 5. make_output_csv.py
-
-這個腳本從輸出文件中提取資料並生成CSV文件。
-
-**運行方式：**
-
-```bash
-python make_output_csv.py --input_directory="/path/to/input_directory" --output_directory="/path/to/output_directory"
-```
-
-你可以使用命令行參數來指定輸入和輸出的資料夾路徑。
-
-### 6. sort_files.py
+### 4. sort_files.py
 
 這個腳本移動特定模式匹配的文件到指定資料夾。
 
@@ -88,3 +65,28 @@ python sort_files.py --input_directory="./input_files" --dcon_directory="./dcon_
 ```
 
 你可以使用命令行參數來指定輸入、DCON文件和輸出文件的資料夾。
+
+### 5. check_state.py
+
+這個腳本處理輸出文件，並將穩定和不穩定的結果分類到不同的資料夾中。
+
+**運行方式：**
+
+```bash
+python check_state.py --input_directory="./output_files" --stable_directory="./processed_outputs_0716/stable" --unstable_directory="./processed_outputs_0716/unstable"
+```
+
+你可以使用命令行參數來指定輸入文件及穩定和不穩定結果的輸出資料夾。
+
+
+### 6. make_output_csv.py
+
+這個腳本從輸出文件中提取資料並生成CSV文件。
+
+**運行方式：**
+
+```bash
+python make_output_csv.py --input_directory="/path/to/input_directory" --output_directory="/path/to/output_directory"
+```
+
+你可以使用命令行參數來指定輸入和輸出的資料夾路徑。
