@@ -6,9 +6,9 @@
 1. `generate_input.py`
 2. `boost_search_walk.py`
 3. `search.py`
-4. `check_state.py`
-5. `make_output_csv.py`
-6. `sort_files.py`
+4. `sort_files.py`
+5. `check_state.py`
+6. `make_output_csv.py`
 
 ## Installation
 
