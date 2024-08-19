@@ -1,3 +1,4 @@
+
 # Running Tools
 
 這是一組用於處理 Stellarator 的腳本，包含以下幾個主要腳本：
@@ -12,7 +13,7 @@
 ## Installation
 
 - Python 3.x
-- Package（Ex：`subprocess`, `os`, `re`, `csv`, `shutil`, `glob`）
+- 必要套件（例如：`subprocess`, `os`, `re`, `csv`, `shutil`, `glob`, `argparse`）
 
 ## 使用說明
 
@@ -23,22 +24,22 @@
 **運行方式：**
 
 ```bash
-python generate_input.py
+python generate_input.py --output_directory="./input_files_0716" --curtor_range_start=800000 --curtor_range_end=800001 --curtor_step=1000 --pres_scale_range_start=80000 --pres_scale_range_end=90001 --pres_scale_step=200
 ```
 
-生成的輸入文件將保存在 `./input_files_0716` 資料夾中。(可自行修改路徑)
+你可以使用命令行參數來指定輸出目錄以及參數範圍。
 
 ### 2. boost_search_walk.py
 
-這個腳本執行多個步驟來處理輸入文件，包括運行和更新配置文件還有產生新的input檔案。
+這個腳本執行多個步驟來處理輸入文件，包括運行和更新配置文件，並生成新的輸入檔案。
 
 **運行方式：**
 
 ```bash
-python boost_search_walk.py
+python boost_search_walk.py --input_folder="./input_files_0716" --output_folder="./new_input_0716"
 ```
 
-輸入文件來自 `./input_files_0716`(可自行修改路徑) 資料夾，更新的輸入文件將保存在 `./new_input_0716` 資料夾中。
+你可以使用命令行參數來指定輸入文件和輸出文件的資料夾。
 
 ### 3. search.py
 
@@ -47,34 +48,34 @@ python boost_search_walk.py
 **運行方式：**
 
 ```bash
-python search.py
+python search.py --input_directory="./new_input_0716" --dcon_directory="./dcon_files" --output_directory="./output_files"
 ```
 
-輸入文件來自 `./new_input_0716` 資料夾，生成的輸出將保存在 `./output_files`(可自行修改路徑) 資料夾中。
+你可以使用命令行參數來指定輸入文件、DCON文件和輸出文件的資料夾。
 
 ### 4. check_state.py
 
-這個腳本處理輸出文件，並將穩定和不穩定的結果分類到不同的資料夾中，並生成 CSV 文件。
+這個腳本處理輸出文件，並將穩定和不穩定的結果分類到不同的資料夾中，並生成CSV文件。
 
 **運行方式：**
 
 ```bash
-python check_state.py
+python check_state.py --input_directory="./output_files" --stable_directory="./processed_outputs_0716/stable" --unstable_directory="./processed_outputs_0716/unstable"
 ```
 
-輸入文件來自 `./output_files` 資料夾，分類後的文件將保存在 `./processed_outputs_0716` 資料夾中，穩定結果的 CSV 文件保存在 `stable_results.csv`。
+你可以使用命令行參數來指定輸入文件及穩定和不穩定結果的輸出資料夾。
 
 ### 5. make_output_csv.py
 
-這個腳本從輸出文件中提取資料並生成 CSV 文件。
+這個腳本從輸出文件中提取資料並生成CSV文件。
 
 **運行方式：**
 
 ```bash
-python make_output_csv.py
+python make_output_csv.py --input_directory="/path/to/input_directory" --output_directory="/path/to/output_directory"
 ```
 
-輸入文件來自 `/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/output_files` (可自行修改路徑)，生成的 CSV 將保存在 `/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/csv_files_0716` (可自行修改路徑)。
+你可以使用命令行參數來指定輸入和輸出的資料夾路徑。
 
 ### 6. sort_files.py
 
@@ -83,7 +84,7 @@ python make_output_csv.py
 **運行方式：**
 
 ```bash
-python sort_files.py
+python sort_files.py --input_directory="./input_files" --dcon_directory="./dcon_files" --output_directory="./output_files"
 ```
 
-文件將從當前資料夾移動到 `./output_files` 資料夾中。
+你可以使用命令行參數來指定輸入、DCON文件和輸出文件的資料夾。
