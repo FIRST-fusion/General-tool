@@ -3,6 +3,7 @@ import glob
 import shutil
 import re
 import csv
+import argparse
 
 def process_output_files(input_directory, stable_directory, unstable_directory, patterns):
     if not os.path.exists(stable_directory):
@@ -14,7 +15,6 @@ def process_output_files(input_directory, stable_directory, unstable_directory, 
 
     def move_related_files(identifier, target_directory):
         for pattern in patterns:
-            # Modify the pattern to match the identifier exactly
             related_files = glob.glob(os.path.join(input_directory, pattern))
             for file_path in related_files:
                 file_name = os.path.basename(file_path)
@@ -68,10 +68,13 @@ def process_output_files(input_directory, stable_directory, unstable_directory, 
         csvwriter.writerows(stable_results)
 
 def main():
-    input_directory = "./output_files"  # Directory where output files are initially stored
-    stable_directory = "./processed_outputs_0716/stable"  # Directory to store stable results
-    unstable_directory = "./processed_outputs_0716/unstable"  # Directory to store unstable results
+    parser = argparse.ArgumentParser(description="Process and categorize VMEC output files.")
+    parser.add_argument('--input_directory', type=str, required=True, help="Directory where output files are initially stored.")
+    parser.add_argument('--stable_directory', type=str, required=True, help="Directory to store stable results.")
+    parser.add_argument('--unstable_directory', type=str, required=True, help="Directory to store unstable results.")
     
+    args = parser.parse_args()
+
     # Patterns to match different types of files
     patterns = [
         "output_*.txt", 
@@ -84,7 +87,7 @@ def main():
         "input.*"
     ]
 
-    process_output_files(input_directory, stable_directory, unstable_directory, patterns)
+    process_output_files(args.input_directory, args.stable_directory, args.unstable_directory, patterns)
     print("Output files have been processed and categorized into separate folders for stable and unstable results.")
 
 if __name__ == "__main__":

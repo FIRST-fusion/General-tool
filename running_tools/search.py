@@ -1,6 +1,7 @@
 import subprocess
 import os
 import glob
+import argparse
 
 def run_command(command, input_file, output_path=None):
     try:
@@ -42,15 +43,19 @@ def move_file_using_mv(source, destination):
         print(f"Error: {e}")
 
 def main():
-    input_directory = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/new_input_0716"  # Directory for input files
-    dcon_directory = "./dcon_files"  # Directory to store dcon files
-    output_directory = "./output_files"  # Directory to store output files
-    if not os.path.exists(dcon_directory):
-        os.makedirs(dcon_directory)
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+    parser = argparse.ArgumentParser(description="Process VMEC and DCON files.")
+    parser.add_argument('--input_directory', type=str, required=True, help="Directory for input files.")
+    parser.add_argument('--dcon_directory', type=str, required=True, help="Directory to store DCON files.")
+    parser.add_argument('--output_directory', type=str, required=True, help="Directory to store output files.")
 
-    input_files = glob.glob(os.path.join(input_directory, "input.FIRST*"))
+    args = parser.parse_args()
+
+    if not os.path.exists(args.dcon_directory):
+        os.makedirs(args.dcon_directory)
+    if not os.path.exists(args.output_directory):
+        os.makedirs(args.output_directory)
+
+    input_files = glob.glob(os.path.join(args.input_directory, "input.FIRST*"))
 
     for input_file in input_files:
         # First command
@@ -58,8 +63,8 @@ def main():
             # Extract file name from full path and construct corresponding dcon file name
             base_name = os.path.basename(input_file).split('.')[1]  # Extract "FIRST1" from "input.FIRST1"
             dcon_filename = os.path.join("./", f"dcon_{base_name}.txt")
-            dcon_target_path = os.path.join(dcon_directory, f"dcon_{base_name}.txt")
-            output_path = os.path.join(output_directory, f"output_{base_name}.txt")
+            dcon_target_path = os.path.join(args.dcon_directory, f"dcon_{base_name}.txt")
+            output_path = os.path.join(args.output_directory, f"output_{base_name}.txt")
 
             # Move dcon file to specified directory
             if os.path.exists(dcon_filename):
@@ -70,15 +75,13 @@ def main():
                 run_command("./run_dcon_singlefile.sh", dcon_target_path, output_path=output_path)
             else:
                 print(f"File not found: {dcon_filename}")
-        # else:
-        #     print(f"Command './xvmec' execution failed, corresponding dcon file for {input_file} not generated.")
 
-    move_file_using_mv('./jxbout_*', './output_files')
-    move_file_using_mv('./thread1.*', './output_files')
-    move_file_using_mv('./wout_*', './output_files')
-    move_file_using_mv('./mercier.*', './output_files')
-    move_file_using_cp(f'{input_directory}/*', './output_files')
-    move_file_using_cp(f'{dcon_directory}/*', './output_files')
+    move_file_using_mv('./jxbout_*', args.output_directory)
+    move_file_using_mv('./thread1.*', args.output_directory)
+    move_file_using_mv('./wout_*', args.output_directory)
+    move_file_using_mv('./mercier.*', args.output_directory)
+    move_file_using_cp(f'{args.input_directory}/*', args.output_directory)
+    move_file_using_cp(f'{args.dcon_directory}/*', args.output_directory)
 
-# Execute main program
-main()
+if __name__ == "__main__":
+    main()

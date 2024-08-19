@@ -1,6 +1,7 @@
 import subprocess
 import re
 import os
+import argparse
 
 def run_command(command):
     print(f"Executing: {command}")
@@ -86,12 +87,16 @@ def process_input_file(input_filename, output_folder):
     # run_command(f"./xvmec {new_input_filename}")
 
 def main():
-    input_folder = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/input_files_0716"  # 指定包含input檔案的資料夾
-    output_folder = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/new_input_0716"  # 指定儲存new input檔案的資料夾
-    input_files = [os.path.join(input_folder, f) for f in os.listdir(input_folder) if f.startswith("input.")]
+    parser = argparse.ArgumentParser(description="Process VMEC input files.")
+    parser.add_argument('--input_folder', type=str, required=True, help="Folder containing the input files.")
+    parser.add_argument('--output_folder', type=str, required=True, help="Folder to save the new input files.")
+
+    args = parser.parse_args()
+
+    input_files = [os.path.join(args.input_folder, f) for f in os.listdir(args.input_folder) if f.startswith("input.")]
 
     for input_file in input_files:
-        process_input_file(input_file, output_folder)
+        process_input_file(input_file, args.output_folder)
 
 if __name__ == "__main__":
     main()
