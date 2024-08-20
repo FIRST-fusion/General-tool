@@ -69,8 +69,8 @@ def process_input_file(input_filename, output_folder):
     # 1. 執行 ./xvmec input_filename
     run_command(f"{prefix_dir}/xvmec {input_filename}")
 
-    # 2. 執行 ./boostj_quick.sh filename 1
-    boostj_output = run_command(f"{prefix_dir}/boostj_quick.sh {filename} 1")
+    # 2. 執行 ./bootsj_quick.sh filename 1
+    boostj_output = run_command(f"{prefix_dir}/bootsj_quick.sh {filename} 1")
 
     # 捕捉 bsj_fraction
     bsj_fraction = get_bsj_fraction(boostj_output)
