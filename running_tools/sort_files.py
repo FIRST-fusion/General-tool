@@ -1,6 +1,8 @@
 import subprocess
 import argparse
 
+prefix_dir = "/workspace/Stellarator-Tools/build/_deps/parvmec-build"
+
 def move_file_using_mv(source_pattern, destination_folder):
     try:
         # Construct the full command string
@@ -19,10 +21,10 @@ def main():
 
     args = parser.parse_args()
 
-    move_file_using_mv('./jxbout_*', args.output_directory)
-    move_file_using_mv('./threed1.*', args.output_directory)
-    move_file_using_mv('./wout_*', args.output_directory)
-    move_file_using_mv('./mercier.*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/jxbout_*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/threed1.*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/wout_*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/mercier.*', args.output_directory)
     # move_file_using_cp(f'{args.input_directory}/*', args.output_directory)
     move_file_using_mv(f'{args.dcon_directory}/*', args.output_directory)
 

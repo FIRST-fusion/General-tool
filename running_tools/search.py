@@ -3,6 +3,8 @@ import os
 import glob
 import argparse
 
+prefix_dir = "/workspace/Stellarator-Tools/build/_deps/parvmec-build"
+
 def run_command(command, input_file, output_path=None):
     try:
         if output_path:
@@ -59,7 +61,7 @@ def main():
 
     for input_file in input_files:
         # First command
-        if run_command("./xvmec", input_file):
+        if run_command(f"{prefix_dir}/xvmec", input_file):
             # Extract file name from full path and construct corresponding dcon file name
             base_name = os.path.basename(input_file).split('.')[1]  # Extract "FIRST1" from "input.FIRST1"
             dcon_filename = os.path.join("./", f"dcon_{base_name}.txt")
@@ -76,10 +78,10 @@ def main():
             else:
                 print(f"File not found: {dcon_filename}")
 
-    move_file_using_mv('./jxbout_*', args.output_directory)
-    move_file_using_mv('./thread1.*', args.output_directory)
-    move_file_using_mv('./wout_*', args.output_directory)
-    move_file_using_mv('./mercier.*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/jxbout_*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/thread1.*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/wout_*', args.output_directory)
+    move_file_using_mv(f'{prefix_dir}/mercier.*', args.output_directory)
     move_file_using_cp(f'{args.input_directory}/*', args.output_directory)
     move_file_using_cp(f'{args.dcon_directory}/*', args.output_directory)
 

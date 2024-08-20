@@ -3,6 +3,8 @@ import re
 import os
 import argparse
 
+prefix_dir = "/workspace/Stellarator-Tools/build/_deps/parvmec-build"
+
 def run_command(command):
     print(f"Executing: {command}")
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
@@ -65,10 +67,10 @@ def process_input_file(input_filename, output_folder):
     print(f"Starting process with input file: {input_filename}")
 
     # 1. 執行 ./xvmec input_filename
-    run_command(f"./xvmec {input_filename}")
+    run_command(f"{prefix_dir}/xvmec {input_filename}")
 
     # 2. 執行 ./boostj_quick.sh filename 1
-    boostj_output = run_command(f"./boostj_quick.sh {filename} 1")
+    boostj_output = run_command(f"{prefix_dir}/boostj_quick.sh {filename} 1")
 
     # 捕捉 bsj_fraction
     bsj_fraction = get_bsj_fraction(boostj_output)
@@ -77,7 +79,7 @@ def process_input_file(input_filename, output_folder):
     Itotal = get_Itotal(input_filename)
 
     # 3. 執行 ./pcurr_generator.py --bsj bsj_fraction --curtor Itotal --input {filename} --ns 225
-    run_command(f"./pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
+    run_command(f"{prefix_dir}/pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
 
     # 4. 更新 input 檔案
     new_profile_filename = f"new_profile_{filename}.txt"
