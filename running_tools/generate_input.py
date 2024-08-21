@@ -1,12 +1,13 @@
 import os
+import argparse
 
-# 設定輸出資料夾
-output_directory = "./input_files_0716"  
-if not os.path.exists(output_directory):
-    os.makedirs(output_directory)
+def generate_input_files(output_directory, curtor_range_start, curtor_range_end, curtor_step, pres_scale_range_start, pres_scale_range_end, pres_scale_step):
+    # 確認輸出資料夾存在，否則建立
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
 
-# 模板
-base_template =  """
+    # 模板
+    base_template =  """
 &INDATA
 ! VMEC execution parameters.
 LFORBAL = F,
@@ -47,7 +48,7 @@ BLOAT = 1.0,
   RBC(0,6) =  -6.855647E-05   , ZBS(0,6) =  -6.410187E-04
   RBC(0,7) =  -4.823187E-05   , ZBS(0,7) =   8.440305E-05
   RBC(0,8) =   5.814622E-05   , ZBS(0,8) =   1.229844E-04
-  RBC(0,9) =  -4.688419E-08   , ZBS(0,9) =  -4.849090E-05
+  RBC(0,9) =   -4.688419E-08   , ZBS(0,9) =  -4.849090E-05
   RBC(0,10) =  -1.213299E-05   , ZBS(0,10) =  -1.442473E-05
   RBC(0,11) =   4.993245E-06   , ZBS(0,11) =   1.671574E-05
   RBC(0,12) =   5.525981E-07   , ZBS(0,12) =   5.525981E-07
@@ -68,18 +69,40 @@ am  = 1.0000   -0.3639   0    0   -3.5480    2.9112
 &END
 """
 
-# 設定 curtor 和 pres_scale 的範圍和步長
-curtor_range = range(800000, 800001, 1000)  # 100000 to 200000 with step 10000
-pres_scale_range = range(80000, 90001, 200)  # 1000 to 3000 with step 1000
+    # 設定 curtor 和 pres_scale 的範圍和步長
+    curtor_range = range(curtor_range_start, curtor_range_end + 1, curtor_step)
+    pres_scale_range = range(pres_scale_range_start, pres_scale_range_end + 1, pres_scale_step)
 
-file_index = 1
-for curtor in curtor_range:
-    for pres_scale in pres_scale_range:
-        file_name = f"input.FIRST{file_index}_0716"
-        file_path = os.path.join(output_directory, file_name)
-        with open(file_path, 'w') as file:
-            file_content = base_template.format(curtor=curtor, pres_scale=pres_scale)
-            file.write(file_content)
-            file_index += 1
+    file_index = 1
+    for curtor in curtor_range:
+        for pres_scale in pres_scale_range:
+            file_name = f"input.FIRST{file_index}_0716"
+            file_path = os.path.join(output_directory, file_name)
+            with open(file_path, 'w') as file:
+                file_content = base_template.format(curtor=curtor, pres_scale=pres_scale)
+                file.write(file_content)
+                file_index += 1
 
-print(f"Generated {file_index - 1} files in '{output_directory}'.")
+    print(f"Generated {file_index - 1} files in '{output_directory}'.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate input files.")
+    parser.add_argument('--output_directory', type=str, default="./input_files_0716", help="Output directory for the generated files.")
+    parser.add_argument('--curtor_range_start', type=int, default=800000, help="Start value for curtor.")
+    parser.add_argument('--curtor_range_end', type=int, default=800001, help="End value for curtor.")
+    parser.add_argument('--curtor_step', type=int, default=1000, help="Step value for curtor range.")
+    parser.add_argument('--pres_scale_range_start', type=int, default=80000, help="Start value for pres_scale.")
+    parser.add_argument('--pres_scale_range_end', type=int, default=90001, help="End value for pres_scale.")
+    parser.add_argument('--pres_scale_step', type=int, default=200, help="Step value for pres_scale range.")
+
+    args = parser.parse_args()
+
+    generate_input_files(
+        output_directory=args.output_directory,
+        curtor_range_start=args.curtor_range_start,
+        curtor_range_end=args.curtor_range_end,
+        curtor_step=args.curtor_step,
+        pres_scale_range_start=args.pres_scale_range_start,
+        pres_scale_range_end=args.pres_scale_range_end,
+        pres_scale_step=args.pres_scale_step
+    )

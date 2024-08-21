@@ -22,12 +22,14 @@ if [ "$current_dir" == "$exe_dir" ]; then
               terps_quick.sh \
               descur2vmec.py \
               pcurr_generator.py \
+              read_netcdf.py 
               vm3_quick.sh to VMEC run directory"
         cp ${current_dir}/bootsj_quick.sh \
            ${current_dir}/run_dcon_singlefile.sh \
            ${current_dir}/terps_quick.sh \
            ${current_dir}/descur2vmec.py \
            ${current_dir}/pcurr_generator.py \
+           ${current_dir}/read_netcdf.py \
            ${current_dir}/vm3_quick.sh  \
            ${vmec_path}
         echo "cp fort43_generator.sh to terp_bsj run directory"
