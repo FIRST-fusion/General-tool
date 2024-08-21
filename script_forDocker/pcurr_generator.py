@@ -10,7 +10,7 @@ import argparse
 
 
 '''
-bsj_path = '/home/linshih/workspace/terp_bootsj'
+bsj_path = '/workspace/TERPSICHORE/terp_bootsj'
 input_path = f'{bsj_path}/fort.43'
 parser = argparse.ArgumentParser()
 parser.add_argument('--curtor', help = 'total toroidal current', default = 8E+05, type = float)
