@@ -10,13 +10,13 @@ import argparse
 
 
 '''
-bsj_path = '/workspace/TERPSICHORE/terp_bootsj'
+bsj_path = '/home/linshih/workspace/terp_bootsj'
 input_path = f'{bsj_path}/fort.43'
 parser = argparse.ArgumentParser()
 parser.add_argument('--curtor', help = 'total toroidal current', default = 8E+05, type = float)
 parser.add_argument('--bsj', help = 'raw bootstrap current', default = 0., type = str, required=True)
 parser.add_argument('--input', help = 'input file name e.g. FIRST_mmdd_bootsj1', type = str, required=True)
-parser.add_argument('--ns', help = 'ns_array (mesh)', default = 289, type = int)
+parser.add_argument('--ns', help = 'ns_array (mesh)', default = 225, type = int)
 #parser.add_argument('--iter', help = 'iteration', type = int, required=True)
 args = parser.parse_args()
 
@@ -24,6 +24,7 @@ def discretise_ohmic_profile(s):
     #return 1-s-s**2+s**3
     #return 2 * (1 - s**7)**2 - (1 - s**3)**2
     return 2*( 1 - s**2)**2 - ( 1 - s )**2
+    #return 2*(1-s**10)**2-(1-s**4)**2
 
 def read_fort(input_fort_name):
     try:
@@ -58,8 +59,10 @@ def normalise_profile(numbers):
 def iterate_profile(ohmic_profile, scale, bsj_profile):
     return (1-scale) * ohmic_profile +scale* bsj_profile
 
-def write_new_profile(new_profile,radial,filename):
+def write_new_profile(scale,new_profile,radial,filename):
     with open(filename, 'w') as file:
+        file.write('!bsc = %.5f \n' % float(scale*args.curtor))
+        file.write('!bsc ratio = %.5f\n' % scale )
         file.write('pcurr_type = \'Akima_spline_Ip\'\n')
         file.write('ac_aux_f = \n')
         for i, p in enumerate(new_profile):
@@ -96,18 +99,19 @@ def main():
     # read fort.43
     bsj_profile = read_fort(f'fort.43_{args.input}')
     norm_bsj_profile = normalise_profile(-bsj_profile)
-    print_profile(bsj_profile)
+    #print_profile(bsj_profile)
     #print("\n")
     #print_profile(norm_bsj_profile)
     radial = read_fort('fort.48')
-    print_profile(radial)
+    #print_profile(radial)
     
     '''get new profile'''
     scale = calculate_bsj_ratio()
     new_profile = iterate_profile(norm_ohmic_profile,scale,norm_bsj_profile)
-    write_new_profile(new_profile,radial,f'new_profile_{args.input}.txt')
+    write_new_profile(scale ,new_profile,radial,f'new_profile_{args.input}.txt')
     #print_profile(new_profile)
     print("scale: %.5f " % scale)
+    print("[Done] new profile for iteration is generated!")
 
 
 main() 
