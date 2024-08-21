@@ -1,6 +1,9 @@
 import subprocess
 import re
 import os
+import argparse
+
+prefix_dir = "/workspace/Stellarator-Tools/build/_deps/parvmec-build"
 
 def run_command(command):
     print(f"Executing: {command}")
@@ -64,10 +67,10 @@ def process_input_file(input_filename, output_folder):
     print(f"Starting process with input file: {input_filename}")
 
     # 1. 執行 ./xvmec input_filename
-    run_command(f"./xvmec {input_filename}")
+    run_command(f"{prefix_dir}/xvmec {input_filename}")
 
-    # 2. 執行 ./boostj_quick.sh filename 1
-    boostj_output = run_command(f"./boostj_quick.sh {filename} 1")
+    # 2. 執行 ./bootsj_quick.sh filename 1
+    boostj_output = run_command(f"{prefix_dir}/bootsj_quick.sh {filename} 1")
 
     # 捕捉 bsj_fraction
     bsj_fraction = get_bsj_fraction(boostj_output)
@@ -76,7 +79,7 @@ def process_input_file(input_filename, output_folder):
     Itotal = get_Itotal(input_filename)
 
     # 3. 執行 ./pcurr_generator.py --bsj bsj_fraction --curtor Itotal --input {filename} --ns 225
-    run_command(f"./pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
+    run_command(f"{prefix_dir}/pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
 
     # 4. 更新 input 檔案
     new_profile_filename = f"new_profile_{filename}.txt"
@@ -86,12 +89,16 @@ def process_input_file(input_filename, output_folder):
     # run_command(f"./xvmec {new_input_filename}")
 
 def main():
-    input_folder = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/input_files_0716"  # 指定包含input檔案的資料夾
-    output_folder = "/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/new_input_0716"  # 指定儲存new input檔案的資料夾
-    input_files = [os.path.join(input_folder, f) for f in os.listdir(input_folder) if f.startswith("input.")]
+    parser = argparse.ArgumentParser(description="Process VMEC input files.")
+    parser.add_argument('--input_folder', type=str, required=True, help="Folder containing the input files.")
+    parser.add_argument('--output_folder', type=str, required=True, help="Folder to save the new input files.")
+
+    args = parser.parse_args()
+
+    input_files = [os.path.join(args.input_folder, f) for f in os.listdir(args.input_folder) if f.startswith("input.")]
 
     for input_file in input_files:
-        process_input_file(input_file, output_folder)
+        process_input_file(input_file, args.output_folder)
 
 if __name__ == "__main__":
     main()

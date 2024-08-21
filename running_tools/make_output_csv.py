@@ -1,6 +1,7 @@
 import re
 import csv
 import os
+import argparse
 
 def extract_data(filename):
     with open(filename, 'r') as file:
@@ -48,8 +49,12 @@ def process_files_in_directory(input_directory, output_directory):
             print(f'Processed {filename} and saved as {output_filepath}')
 
 if __name__ == '__main__':
-    input_directory = '/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/output_files'
-    output_directory = '/home/f74091247/Stellarator-Tools/build/_deps/parvmec-build/csv_files_0716'
-    process_files_in_directory(input_directory, output_directory)
+    parser = argparse.ArgumentParser(description="Extract data from text files and write to CSV.")
+    parser.add_argument('--input_directory', type=str, required=True, help="Directory containing input text files.")
+    parser.add_argument('--output_directory', type=str, required=True, help="Directory to save output CSV files.")
+
+    args = parser.parse_args()
+
+    process_files_in_directory(args.input_directory, args.output_directory)
 
     print('Data extraction and CSV creation for all files completed.')
