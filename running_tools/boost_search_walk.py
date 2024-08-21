@@ -78,8 +78,8 @@ def process_input_file(input_filename, output_folder):
     # 捕捉 Itotal
     Itotal = get_Itotal(input_filename)
 
-    # 3. 執行 ./pcurr_generator.py --bsj bsj_fraction --curtor Itotal --input {filename} --ns 225
-    run_command(f"{prefix_dir}/pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
+    # 3. 執行 python3 pcurr_generator.py --bsj bsj_fraction --curtor Itotal --input {filename} --ns 225
+    run_command(f"python3 {prefix_dir}/pcurr_generator.py --bsj {bsj_fraction} --curtor {Itotal} --input {filename} --ns 225")
 
     # 4. 更新 input 檔案
     new_profile_filename = f"new_profile_{filename}.txt"
