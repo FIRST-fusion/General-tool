@@ -74,7 +74,7 @@ def main():
                 print(f"File: {dcon_filename} moved to {dcon_target_path}")
 
                 # Second command, use new file path and redirect output to file
-                run_command("./run_dcon_singlefile.sh", dcon_target_path, output_path=output_path)
+                run_command(f"{prefix_dir}/run_dcon_singlefile.sh", dcon_target_path, output_path=output_path)
             else:
                 print(f"File not found: {dcon_filename}")
 

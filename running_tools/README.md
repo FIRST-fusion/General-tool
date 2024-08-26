@@ -29,14 +29,14 @@ python generate_input.py --output_directory="./input_files_0716" --curtor_range_
 
 你可以使用命令行參數來指定輸出目錄以及參數範圍。
 
-### 2. boost_search_walk.py
+### 2. boots_search_walk.py
 
 這個腳本執行多個步驟來處理輸入文件，包括運行和更新配置文件，並生成新的輸入檔案。
 
 **運行方式：**
 
 ```bash
-python boost_search_walk.py --input_folder="./input_files_0716" --output_folder="./new_input_0716"
+python boots_search_walk.py --input_folder="./input_files_0716" --output_folder="./new_input_0716"
 ```
 
 你可以使用命令行參數來指定輸入文件和輸出文件的資料夾。

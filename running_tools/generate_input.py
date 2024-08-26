@@ -76,7 +76,7 @@ am  = 1.0000   -0.3639   0    0   -3.5480    2.9112
     file_index = 1
     for curtor in curtor_range:
         for pres_scale in pres_scale_range:
-            file_name = f"input.FIRST{file_index}_0716"
+            file_name = f"input.FIRST{file_index}"
             file_path = os.path.join(output_directory, file_name)
             with open(file_path, 'w') as file:
                 file_content = base_template.format(curtor=curtor, pres_scale=pres_scale)
