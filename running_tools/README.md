@@ -24,7 +24,7 @@
 **運行方式：**
 
 ```bash
-python generate_input.py --output_directory="./input_files_0716" --curtor_range_start=800000 --curtor_range_end=800001 --curtor_step=1000 --pres_scale_range_start=80000 --pres_scale_range_end=90001 --pres_scale_step=200
+python3 generate_input.py --output_directory="./input_files_0716" --curtor_range_start=800000 --curtor_range_end=800001 --curtor_step=1000 --pres_scale_range_start=80000 --pres_scale_range_end=90001 --pres_scale_step=200
 ```
 
 你可以使用命令行參數來指定輸出目錄以及參數範圍。
@@ -36,7 +36,7 @@ python generate_input.py --output_directory="./input_files_0716" --curtor_range_
 **運行方式：**
 
 ```bash
-python boots_search_walk.py --input_folder="./input_files_0716" --output_folder="./new_input_0716"
+python3 boots_search_walk.py --input_folder="./input_files_0716" --output_folder="./new_input_0716"
 ```
 
 你可以使用命令行參數來指定輸入文件和輸出文件的資料夾。
@@ -48,7 +48,7 @@ python boots_search_walk.py --input_folder="./input_files_0716" --output_folder=
 **運行方式：**
 
 ```bash
-python search.py --input_directory="./new_input_0716" --dcon_directory="./dcon_files" --output_directory="./output_files"
+python3 search.py --input_directory="./new_input_0716" --dcon_directory="./dcon_files" --output_directory="./output_files"
 ```
 
 你可以使用命令行參數來指定輸入文件、DCON文件和輸出文件的資料夾。
@@ -61,7 +61,7 @@ python search.py --input_directory="./new_input_0716" --dcon_directory="./dcon_f
 **運行方式：**
 
 ```bash
-python sort_files.py --input_directory="./input_files" --dcon_directory="./dcon_files" --output_directory="./output_files"
+python3 sort_files.py --input_directory="./input_files" --dcon_directory="./dcon_files" --output_directory="./output_files"
 ```
 
 你可以使用命令行參數來指定輸入、DCON文件和輸出文件的資料夾。
@@ -73,7 +73,7 @@ python sort_files.py --input_directory="./input_files" --dcon_directory="./dcon_
 **運行方式：**
 
 ```bash
-python check_state.py --input_directory="./output_files" --stable_directory="./processed_outputs_0716/stable" --unstable_directory="./processed_outputs_0716/unstable"
+python3 check_state.py --input_directory="./output_files" --stable_directory="./processed_outputs_0716/stable" --unstable_directory="./processed_outputs_0716/unstable"
 ```
 
 你可以使用命令行參數來指定輸入文件及穩定和不穩定結果的輸出資料夾。
@@ -86,7 +86,7 @@ python check_state.py --input_directory="./output_files" --stable_directory="./p
 **運行方式：**
 
 ```bash
-python make_output_csv.py --input_directory="/path/to/input_directory" --output_directory="/path/to/output_directory"
+python3 make_output_csv.py --input_directory="/path/to/input_directory" --output_directory="/path/to/output_directory"
 ```
 
 你可以使用命令行參數來指定輸入和輸出的資料夾路徑。
