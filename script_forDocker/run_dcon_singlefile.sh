@@ -32,8 +32,8 @@ sed -i "s|eq_filename=.*|eq_filename=\"${filename}\"|" ${dcon_dir}/equil.in
 echo "after change path and file >>> "
 cat ${dcon_dir}/equil.in | grep eq_filename
 
-echo "Examine mode n = 1 to 5"
-for n in {1..5}
+echo "Examine mode n = 1 to 3"
+for n in {1..3}
 do
 	sed -i "s|nn=.*|nn=${n}|" ${dcon_dir}/dcon.in
 	./dcon 
