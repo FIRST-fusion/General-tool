@@ -31,6 +31,7 @@ if [ "$current_dir" == "$exe_dir" ]; then
            ${current_dir}/pcurr_generator.py \
            ${current_dir}/read_netcdf.py \
            ${current_dir}/vm3_quick.sh  \
+           ${current_dir}/check_profile.sh \
            ${vmec_path}
         echo "cp fort43_generator.sh to terp_bsj run directory"
         cp ${current_dir}/fort43_generator.sh ${bsj_path}
