@@ -6,6 +6,7 @@ import netCDF4 as nc
 import numpy as np
 
 mu0 = 4 * np.pi * 1e-7  # 磁導率常數
+a = 0.32
 
 def extract_data_from_txt(filename):
     with open(filename, 'r') as file:
@@ -29,7 +30,7 @@ def extract_data_from_txt(filename):
             ballooning = match.group(3)
             mercier = match.group(4)
             fix_boundary = 'unstable' if 'Zero crossing' in section else 'stable'
-            results.append((nn, free_boundary, ballooning, mercier, fix_boundary))
+            results.append((nn, fix_boundary, free_boundary, ballooning, mercier))
 
     return results
 
@@ -38,17 +39,25 @@ def extract_data_from_nc(nc_file):
         p_avg = ds.variables['p_avg'][:]
         b0 = ds.variables['b0'][:]
         ctor = ds.variables['ctor'][:]
-
+        # Aminor_p = ds.variables['Aminor_p'][:]
         # 計算 beta 和 beta_N
         betatotal = p_avg * 2 * mu0 / (b0 * b0)
-        beta_N = betatotal * 100 * np.abs(b0) / (np.abs(ctor) * 1e-6)
+        beta_N = betatotal * 100 * a * np.abs(b0) / (np.abs(ctor) * 1e-6)
+        
+        print("====================================")
+        print(p_avg)
+        print(b0)
+        print(ctor)
+        print(betatotal)
+        print(beta_N)
+        print("====================================")
 
     return betatotal, beta_N
 
 def write_to_csv(data, output_filepath):
     with open(output_filepath, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['nn', 'All free-boundary modes', 'Ballooning', 'Mercier', 'Fix boundary', 'beta', 'beta_N'])
+        csvwriter.writerow(['nn', 'Fix boundary', 'All free-boundary modes', 'Ballooning', 'Mercier', 'beta', 'beta_N'])
         csvwriter.writerows(data)
 
 def process_files_in_directory(input_directory, output_directory):
