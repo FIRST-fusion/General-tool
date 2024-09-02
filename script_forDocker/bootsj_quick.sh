@@ -14,10 +14,10 @@ vmec2tpr_dir="/workspace/TERPSICHORE/vmec2tpr"
 bootsj="/workspace/TERPSICHORE/terp_bootsj"
 
 
-echo "VMEC input namelist: input.${inputvmec} & wout_${inputvmec}.txt"
+echo "vmec input namelist: input.${inputvmec} & wout_${inputvmec}.txt"
 #./xvmec input.${inputvmec}.vmec
 if [ ! -e "wout_$inputvmec.txt" ]; then
-  echo "Error: Input file 'wout_$inputvmec.txt' not found. Exiting script."
+  echo "error: input file 'wout_$inputvmec.txt' not found. exiting script."
   exit 1
 fi
 
