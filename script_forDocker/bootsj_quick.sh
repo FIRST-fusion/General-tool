@@ -62,7 +62,7 @@ if [ ! -e "${inputvmec}.data" ]; then
 fi
 
 echo "Run bootsj"
-time ./tprbal.x < ${inputvmec}.data 2>&1 | tee ${inputvmec}.log
+./tprbal.x < ${inputvmec}.data 2>&1 | tee ${inputvmec}.log
 
 echo "Back-up fort.43 and fort.44, fort.49"
 cp fort.43 fort.43_${inputvmec}
