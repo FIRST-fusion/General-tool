@@ -62,10 +62,10 @@ def process_output_files(input_directory, stable_directory, unstable_directory, 
         move_related_files(identifier, target_directory)
 
     # Save the results to a CSV file
-    with open('stable_results.csv', 'w', newline='') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['Identifier', 'betat', 'betan', 'betaj'])
-        csvwriter.writerows(stable_results)
+    # with open('stable_results.csv', 'w', newline='') as csvfile:
+    #     csvwriter = csv.writer(csvfile)
+    #     csvwriter.writerow(['Identifier', 'betat', 'betan', 'betaj'])
+    #     csvwriter.writerows(stable_results)
 
 def main():
     parser = argparse.ArgumentParser(description="Process and categorize VMEC output files.")
@@ -84,7 +84,8 @@ def main():
         "wout_*.txt", 
         "mercier.*", 
         "dcon_*", 
-        "input.*"
+        "input.*",
+        "new_profile_*.txt"
     ]
 
     process_output_files(args.input_directory, args.stable_directory, args.unstable_directory, patterns)

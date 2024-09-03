@@ -54,7 +54,7 @@ def update_input_file(input_filename, new_profile_filename, output_folder):
 
     # 生成新的 input 檔案
     os.makedirs(output_folder, exist_ok=True)
-    new_input_filename = os.path.join(output_folder, f"{os.path.basename(input_filename)}_boostj1")
+    new_input_filename = os.path.join(output_folder, f"{os.path.basename(input_filename)}_bootsj1")
     with open(new_input_filename, 'w') as file:
         file.writelines(updated_lines)
 
