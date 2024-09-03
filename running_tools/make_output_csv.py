@@ -51,6 +51,8 @@ def extract_data_from_nc(nc_file):
         print(beta_N)
         print("====================================")
 
+    betatotal = round(betatotal, 5)
+    beta_N = round(beta_N, 5)
     return betatotal, beta_N
 
 def extract_bsc_data(filename):
@@ -68,6 +70,8 @@ def extract_bsc_data(filename):
                 bsc_ratio = float(stripped_line.split('=')[1].strip())
     
     print(f"Final parsed values - bsc: {bsc}, bsc_ratio: {bsc_ratio}")
+    bsc = round(bsc, 5)
+    bsc_ratio = round(bsc, 5)
     return bsc, bsc_ratio
 
 def write_to_csv(data, output_filepath):
