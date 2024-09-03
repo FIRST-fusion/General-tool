@@ -1,3 +1,4 @@
+#!/bin/bash
 # This script is created by Lin Shih
 # Date : 2023 8 12
 # After running vmec, execute this script with dcon_{filename}.txt output from vmec
@@ -13,7 +14,6 @@
 #
 # Contact: Lin Shih (linshih010@gmail.com)
 
-#!/bin/bash
 
 equil_file=${1}
 
