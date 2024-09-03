@@ -1,12 +1,16 @@
 import netCDF4 as nc
 import numpy as np
+import argparse
 
 mu0 = 4 * np.pi * 1e-7
 a = 0.32 
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-i','--input', help = 'input file name e.g. FIRST_mmdd_bootsj1', type = str, required=True)
+
+args = parser.parse_args()
 # Open the NetCDF file
-file_path = 'wout_FIRST_test.nc'
-ds = nc.Dataset(file_path, 'r')
+ds = nc.Dataset(args.input, 'r')
 
 
 # Extract a specific variable
