@@ -11,10 +11,10 @@ aspect_ratio =R0/a
 % inputfile = ['wout/wout_',inputfile,'.vmec.nc'];
 filename=truncateString(inputfile)
 numdefargs=1;   %Number of default arguments
-if nargin >numdefargs
+if nargin > numdefargs
     coil_data=read_coils(coilfile)
 end
-phidex=180;   % Index at which to plot the flux surfaces
+phidex=1;   % Index at which to plot the flux surfaces
 % read from wout
 rmin_surf=ncread(inputfile,'rmin_surf');
 rmax_surf=ncread(inputfile,'rmax_surf');
@@ -73,7 +73,8 @@ presf_=presfunct(theta,phi,presf);
  %     savefilename10 = [filename,'_fluxsurf_coilplane.png'];
  %     saveas(gcf,savefilename10);
  % end
- %% 2D Contour plots (modB)
+
+%% 2D Contour plots (modB)
  figure;
  torocont(r,z,modb,phidex);
  colormap(jet)
@@ -110,7 +111,7 @@ presf_=presfunct(theta,phi,presf);
      saveas(gcf,savefilename30);
  end
 
-%  3D Flux surface plots (isotoro)
+%% 3D Flux surface plots (isotoro)
 
 % figure;
 % isotoro(r,z,phi,ns,modb);
