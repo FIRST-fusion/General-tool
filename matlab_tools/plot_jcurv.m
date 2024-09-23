@@ -1,9 +1,5 @@
 function draw_jcurv(inputfile)
 
-% draw_jcurv('wout_filename.nc)
-% Created by Lin 2023
-% uploaded in 2024 July 4th
-
 filename = truncateString(inputfile);
 
 % read from NCfile
